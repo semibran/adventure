@@ -1,0 +1,21 @@
+{
+  "name": "adventure",
+  "version": "0.1.0",
+  "description": "Top-down adventure game",
+  "keywords": [
+    "adventure",
+    "game"
+  ],
+  "main": "engine",
+  "license": "MIT",
+  "author": "Brandon Semilla (https://github.com/semibran)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/semibran/adventure.git"
+  },
+  "dependencies": {
+    "grid": "github:semibran/grid#v1.0.0",
+    "hitbox": "^1.0.1",
+    "keys": "github:semibran/keys#v1.0.0"
+  }
+}
