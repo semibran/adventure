@@ -1,8 +1,8 @@
 exports.move = move
 
-const { index } = require('grid')
-const { snap, free } = require('./room')
 const { left, top, right, bottom, intersects } = require('hitbox')
+const { index } = require('grid')
+const { floor } = Math
 
 function move(entity, delta, room) {
 	entity.position.x += delta.x
@@ -10,10 +10,10 @@ function move(entity, delta, room) {
 
 	if (room) {
 		var bounds = {
-			left: snap(left(entity), room.scale),
-			top: snap(top(entity), room.scale),
-			right: snap(right(entity), room.scale),
-			bottom: snap(bottom(entity), room.scale)
+			left: floor(left(entity) / room.scale),
+			top: floor(top(entity) / room.scale),
+			right: floor(right(entity) / room.scale),
+			bottom: floor(bottom(entity) / room.scale)
 		}
 		for (var y = bounds.top; y <= bounds.bottom; y++) {
 			for (var x = bounds.left; x <= bounds.right; x++) {
@@ -23,7 +23,7 @@ function move(entity, delta, room) {
 					var wall = {
 						width: room.scale,
 						height: room.scale,
-						position: { x: free(x, room.scale), y: free(y, room.scale) }
+						position: { x: (x + 0.5) * room.scale, y: (y + 0.5) * room.scale }
 					}
 					if (intersects(entity, wall)) {
 						if (delta.x < 0) {

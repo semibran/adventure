@@ -1,30 +1,49 @@
 module.exports = render
 
-const { index, cells } = require('grid')
+const { contains, index, cells } = require('grid')
 const { left, top } = require('hitbox')
+const { round, floor } = Math
+const viewport = {
+	width: 15,
+	height: 15
+}
 
 function render(game, canvas) {
 	if (!canvas) {
 		canvas = document.createElement('canvas')
 	}
 
-	var room = game.world.rooms.find(room => room.entities.includes(game.hero))
-	if (room) {
-		canvas.width = room.width * room.scale
-		canvas.height = room.height * room.scale
+	var { world, hero } = game
+	if (world) {
+		canvas.width = viewport.width * world.scale
+		canvas.height = viewport.height * world.scale
+
+		var width = viewport.width * world.scale
+		var height = viewport.height * world.scale
+		var origin = {
+			x: floor(hero.position.x / width) * viewport.width,
+			y: floor(hero.position.y / height) * viewport.height
+		}
 
 		var context = canvas.getContext('2d')
-		for (var cell of cells(room)) {
-			var tile = room.tiles[index(room, cell)]
-			if (tile === 'wall') {
-				context.fillStyle = 'silver'
-				context.fillRect(cell.x * room.scale, cell.y * room.scale, room.scale, room.scale)
+		for (var y = 0; y < viewport.height; y++) {
+			for (var x = 0; x < viewport.width; x++) {
+				var cell = { x: origin.x + x, y: origin.y + y }
+				if (contains(world, cell)) {
+					var tile = world.tiles[index(world, cell)]
+					if (tile === 'wall') {
+						context.fillStyle = 'silver'
+						context.fillRect(x * world.scale, y * world.scale, world.scale, world.scale)
+					}
+				}
 			}
 		}
 
-		for (var entity of room.entities) {
-			context.fillStyle = 'lime'
-			context.fillRect(left(entity), top(entity), entity.width, entity.height)
+		for (var entity of world.entities) {
+			context.fillStyle = entity === hero
+				? 'lime'
+				: 'red'
+			context.fillRect(left(entity) - origin.x * world.scale, top(entity) - origin.y * world.scale, entity.width, entity.height)
 		}
 	}
 
