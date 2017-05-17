@@ -20,5 +20,8 @@
     "keys": "github:semibran/keys#v1.0.0",
     "vector": "github:semibran/vector#v0.1.0",
     "vector2d": "github:semibran/vector2d#v1.0.0"
+  },
+  "devDependencies": {
+    "budo": "^10.0.3"
   }
 }
