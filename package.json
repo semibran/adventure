@@ -14,8 +14,11 @@
     "url": "https://github.com/semibran/adventure.git"
   },
   "dependencies": {
+    "direction": "github:semibran/direction#v0.1.0",
     "grid": "github:semibran/grid#v1.0.0",
     "hitbox": "^1.0.1",
-    "keys": "github:semibran/keys#v1.0.0"
+    "keys": "github:semibran/keys#v1.0.0",
+    "vector": "github:semibran/vector#v0.1.0",
+    "vector2d": "github:semibran/vector2d#v1.0.0"
   }
 }
