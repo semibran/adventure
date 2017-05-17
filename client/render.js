@@ -2,7 +2,7 @@ module.exports = render
 
 const { contains, index, cells } = require('grid')
 const { left, top } = require('hitbox')
-const { floor } = Math
+const { round, floor } = Math
 const viewport = {
 	width: 15,
 	height: 15
@@ -44,8 +44,8 @@ function render(game, canvas) {
 				? 'lime'
 				: 'red'
 			context.fillRect(
-				left(entity) - origin.x * viewport.width * world.scale,
-				top(entity) - origin.y * viewport.height * world.scale,
+				round(left(entity) - origin.x * viewport.width * world.scale),
+				round(top(entity) - origin.y * viewport.height * world.scale),
 				entity.width,
 				entity.height
 			)

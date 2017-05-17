@@ -82,6 +82,8 @@ var canvas = render(game)
 document.body.appendChild(canvas)
 
 Object.assign(canvas.style, {
+	width: '100vmin',
+	height: '100vmin',
 	position: 'absolute',
 	left: '50%',
 	top: '50%',
