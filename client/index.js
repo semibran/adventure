@@ -1,6 +1,6 @@
 const keys = require('keys')(window)
 const render = require('./render')
-const { update } = require('../engine/room')
+const { update } = require('../engine/world')
 const { move } = require('../engine/input')
 const { resolve } = require('direction')
 const { add, direction } = require('vector2d')
