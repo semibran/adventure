@@ -13,7 +13,11 @@
     "type": "git",
     "url": "https://github.com/semibran/adventure.git"
   },
+  "scripts": {
+    "client": "budo client --dir client --port 8080 --live"
+  },
   "dependencies": {
+    "array": "github:semibran/array#v0.1.0",
     "direction": "github:semibran/direction#v0.1.0",
     "grid": "github:semibran/grid#v1.0.0",
     "hitbox": "^1.0.1",

@@ -1,14 +1,15 @@
 module.exports = render
 
 const { contains, index, cells } = require('grid')
-const { left, top } = require('hitbox')
+const { left, top, right } = require('hitbox')
 const { round, floor } = Math
+const sprites = require('./sprites')
 const viewport = {
 	width: 15,
 	height: 15
 }
 
-function render(game, canvas) {
+function render(game, canvas, key) {
 	if (!canvas) {
 		canvas = document.createElement('canvas')
 	}
@@ -31,10 +32,10 @@ function render(game, canvas) {
 				var cell = { x: origin.x * viewport.width + x, y: origin.y * viewport.height + y }
 				if (contains(world, cell)) {
 					var tile = world.tiles[index(world, cell)]
-					if (tile === 'wall') {
-						context.fillStyle = 'silver'
-						context.fillRect(x * world.scale, y * world.scale, world.scale, world.scale)
-					}
+					context.fillStyle = tile === 'wall'
+						? 'white'
+						: 'black'
+					context.fillRect(x * world.scale, y * world.scale, world.scale, world.scale)
 				}
 			}
 		}
@@ -48,6 +49,25 @@ function render(game, canvas) {
 				round(top(entity) - origin.y * viewport.height * world.scale),
 				entity.width,
 				entity.height
+			)
+			if (entity.item) {
+				context.drawImage(
+					key,
+					round(right(entity) - origin.x * viewport.width * world.scale),
+					round(top(entity) - origin.y * viewport.height * world.scale) - entity.item.height,
+					entity.item.width,
+					entity.item.height
+				)
+			}
+		}
+
+		for (var item of world.items) {
+			context.drawImage(
+				key,
+				round(left(item) - origin.x * viewport.width * world.scale),
+				round(top(item) - origin.y * viewport.height * world.scale),
+				item.width,
+				item.height
 			)
 		}
 	}

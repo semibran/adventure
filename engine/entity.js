@@ -1,6 +1,7 @@
 exports.move = move
 
 const { left, top, right, bottom, intersects } = require('hitbox')
+const { remove } = require('array')
 const { index } = require('grid')
 const { floor } = Math
 
@@ -43,6 +44,11 @@ function move(entity, delta, room) {
 					}
 				}
 			}
+		}
+		var item = room.items.find(item => intersects(entity, item))
+		if (item) {
+			entity.item = item
+			remove(room.items, item)
 		}
 	}
 }

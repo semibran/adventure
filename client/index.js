@@ -63,7 +63,8 @@ var world = {
 				case ' ': return 'floor'
 			}
 		}),
-	entities: []
+	entities: [],
+	items: []
 }
 
 var hero = {
@@ -71,27 +72,51 @@ var hero = {
 	height: world.scale / 2,
 	position: { x: world.width / 2 * world.scale, y: world.height / 2 * world.scale },
 	velocity: { x: 0, y: 0 },
-	speed: 1 / 4,
-	bounce: 1 / 2
+	speed: 1 / 3,
+	bounce: 1 / 2,
+	item: null
 }
 
+var key = {
+	width: world.scale * 2 / 3,
+	height: world.scale * 2 / 3,
+	position: { x: world.width / 6 * world.scale, y: world.height / 2 * world.scale }
+}
+
+var canvas, sprite
 var game = { world, hero }
 world.entities.push(hero)
+world.items.push(key)
 
-var canvas = render(game)
-document.body.appendChild(canvas)
+load('./sprites/key.svg', key => {
+	sprite = key
+	canvas = render(game, null, sprite)
+	document.body.appendChild(canvas)
+	document.body.style.background = 'black'
 
-Object.assign(canvas.style, {
-	width: '100vmin',
-	height: '100vmin',
-	position: 'absolute',
-	left: '50%',
-	top: '50%',
-	transform: 'translate(-50%, -50%)',
-	imageRendering: 'pixelated'
+	Object.assign(canvas.style, {
+		position: 'absolute',
+		left: '50%',
+		top: '50%',
+		transform: 'translate(-50%, -50%)',
+		imageRendering: 'pixelated'
+	})
+
+	next()
 })
 
-next()
+function load(path, callback) {
+	var ajax = new XMLHttpRequest()
+	ajax.open('GET', path, true)
+	ajax.send()
+	ajax.onload = function () {
+		var image = new Image()
+		image.src = 'data:image/svg+xml;base64,' + window.btoa(ajax.responseText)
+		image.onload = function () {
+			callback(image)
+		}
+	}
+}
 
 function input(keys) {
 	var directions = []
@@ -119,7 +144,7 @@ function input(keys) {
 function loop() {
 	input(keys)
 	update(world)
-	render(game, canvas)
+	render(game, canvas, sprite)
 	next()
 }
 

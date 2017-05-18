@@ -5,8 +5,8 @@
 
 Loosely based off of the game [Adventure](https://en.wikipedia.org/wiki/Adventure_(Atari_2600)) for the Atari 2600.
 
-## instructions
-After cloning and installing dependencies, run `client/index.js` via [`budo`](https://github.com/mattdesl/budo) or a similar dev server.
+## usage
+After cloning and installing dependencies, run `npm run client` and navigate to [`http://localhost:8080`](http://localhost:8080).
 
 ## license
 MIT
