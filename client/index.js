@@ -54,12 +54,13 @@ var hero = {
 		x: (room.x + 0.5) * room.width * world.scale,
 		y: (room.y + 0.5) * room.height * world.scale
 	},
+	room: room,
 	speed: 1.5
 }
 
 world.entities.push(hero)
 
-var game = { world, hero, room }
+var game = { world, hero }
 var view = render(game)
 document.body.appendChild(view.tree.world)
 document.body.style.background = 'black'

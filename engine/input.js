@@ -6,7 +6,7 @@ const { degrees } = require('radians')
 const { floor } = Math
 
 function move(game, angle) {
-	var { world, hero, room } = game
+	var { world, hero } = game
 	var normal = resolve({ direction: degrees(angle), magnitude: 1 })
 	if (normal.x) {
 		var delta = { x: normal.x * hero.speed, y: 0 }
@@ -16,6 +16,6 @@ function move(game, angle) {
 		var delta = { x: 0, y: normal.y * hero.speed }
 		Entity.move(hero, delta, world)
 	}
-	room.x = floor(hero.position.x / room.width / world.scale)
-	room.y = floor(hero.position.y / room.height / world.scale)
+	hero.room.x = floor(hero.position.x / hero.room.width / world.scale)
+	hero.room.y = floor(hero.position.y / hero.room.height / world.scale)
 }

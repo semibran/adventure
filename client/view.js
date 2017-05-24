@@ -31,8 +31,9 @@ function render(game, view) {
 		}
 	}
 
-	var { world, hero, room } = game
+	var { world, hero } = game
 	var { cache, tree } = view
+	var room = hero.room
 	var camera = {
 		x: room.x * room.width * world.scale,
 		y: room.y * room.height * world.scale,
