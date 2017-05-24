@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-	<g fill='transparent' stroke='yellow' stroke-width='4'>
-		<circle cx='8' cy='8' r='6'/>
-		<line x1='12' y1='12' x2='24' y2='24'/>
-		<line x1='20' y1='20' x2='16' y2='24'/>
-	</g>
-</svg>
